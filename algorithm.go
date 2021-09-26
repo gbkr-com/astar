@@ -14,7 +14,7 @@ type Interface interface {
 	// Adjacent returns a map of the adjacent points with their associated
 	// cost.
 	//
-	Adjacent(int) (map[int]float64, error)
+	Adjacent(int) map[int]float64
 
 	// Estimate returns the estimated cost of moving from the given point to the
 	// goal. Known as the heuristic function (h) in the literature.
@@ -98,7 +98,7 @@ func Find(problem Interface, start, goal int) []int {
 		// Examine each neighbour to find the lowest cost movement from
 		// the current point.
 		//
-		adjacent, _ := problem.Adjacent(current.label)
+		adjacent := problem.Adjacent(current.label)
 		for k, v := range adjacent {
 			p, ok := known[k]
 			if !ok {

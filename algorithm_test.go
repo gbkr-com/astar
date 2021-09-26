@@ -41,7 +41,7 @@ func (s *square) put(label int, value float64) {
 	s.points[r][c] = value
 }
 
-func (s *square) Adjacent(label int) (map[int]float64, error) {
+func (s *square) Adjacent(label int) map[int]float64 {
 	adjacency := make(map[int]float64)
 	r, c := s.coordinates(label)
 	offsets := []int{-1, 0, 1}
@@ -62,7 +62,7 @@ func (s *square) Adjacent(label int) (map[int]float64, error) {
 			adjacency[s.label(nr, nc)] = s.points[nr][nc]
 		}
 	}
-	return adjacency, nil
+	return adjacency
 }
 
 func (s *square) Estimate(from, to int) float64 {
@@ -169,7 +169,7 @@ func (g *graph) edge(i, j int, cost float64) {
 		vertex[i] = cost
 	}
 }
-func (g *graph) Adjacent(i int) (map[int]float64, error) { return g.adjacency[i], nil }
+func (g *graph) Adjacent(i int) map[int]float64 { return g.adjacency[i] }
 
 func (g *graph) Estimate(i, j int) float64 { return 1 }
 

@@ -13,10 +13,12 @@ type Interface interface {
 
 	// Adjacent returns a map of the adjacent points with their associated
 	// cost.
+	//
 	Adjacent(int) (map[int]float64, error)
 
 	// Estimate returns the estimated cost of moving from the given point to the
 	// goal. Known as the heuristic function (h) in the literature.
+	//
 	Estimate(int, int) float64
 }
 

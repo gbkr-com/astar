@@ -65,9 +65,17 @@ func (d *Display) Count() int { return d.side * d.side }
 // Randomise the display.
 func (d *Display) Randomise(p *Palette) {
 	for i := range d.cells {
-		d.cells[i].FillColor = p.Choose()
+		switch i {
+		case 0:
+			d.cells[i].FillColor = p.White()
+		case len(d.cells) - 1:
+			d.cells[i].FillColor = p.White()
+		default:
+			d.cells[i].FillColor = p.Choose()
+		}
 		d.cells[i].Refresh()
 	}
+
 }
 
 // Path puts a mark on the route.
@@ -169,6 +177,14 @@ func (s *Search) Adjacent(i int) map[int]float64 {
 		// The cell colour is equivalent to the cost.
 		//
 		c := s.display.cells[k].FillColor
+		cx := s.palette.Index(c)
+		if cx == s.palette.Count()-1 {
+			//
+			// The darkest cells cannot be traversed.
+			//
+			delete(m, k)
+			continue
+		}
 		m[k] = float64(s.palette.Index(c))
 	}
 	return m

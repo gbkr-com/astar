@@ -43,6 +43,12 @@ func (p *Palette) Path() color.Color { return p.path }
 // Destination returns the colour for the destination mark.
 func (p *Palette) Destination() color.Color { return p.destination }
 
+// Count returns the number of shades.
+func (p *Palette) Count() int { return len(p.shades) }
+
+// White returns the palest color from the shades.
+func (p *Palette) White() color.Color { return p.shades[0] }
+
 // Choose a colour random from the palette.
 func (p *Palette) Choose() color.Color {
 	return p.shades[rand.Intn(len(p.shades))]

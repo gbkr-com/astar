@@ -1,6 +1,7 @@
 package astar
 
 import (
+	"fmt"
 	"math"
 	"testing"
 )
@@ -103,6 +104,7 @@ func TestSquareRouteWithSingleBlockedPoint(t *testing.T) {
 		t.Error()
 	}
 	if !compareToSlice([]int{0, 5, 6, 11, 15}, route) {
+		fmt.Println(route)
 		t.Error()
 	}
 }

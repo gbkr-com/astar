@@ -95,7 +95,7 @@ func main() {
 	//
 	// Launch.
 	//
-	w := application.NewWindow("Hello World")
+	w := application.NewWindow("Path finding")
 	content := container.NewBorder(nil, nil, nil, right, centre)
 	w.SetContent(content)
 	w.Resize(fyne.NewSize(750, 650))

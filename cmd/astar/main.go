@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"image/color"
 
 	"fyne.io/fyne/v2"
@@ -13,6 +12,10 @@ import (
 )
 
 func main() {
+	//
+	// Top panel is for information.
+	//
+	topLabel := widget.NewLabel("")
 	//
 	// Centre panel.
 	//
@@ -48,7 +51,7 @@ func main() {
 			r := astar.Find(srch, 0, display.Count()-1)
 			n := len(r)
 			if n == 0 {
-				fmt.Println("nil")
+				topLabel.SetText("No path can be found")
 				return
 			}
 			for i := 0; i < n; i++ {
@@ -69,6 +72,7 @@ func main() {
 			if display.ClearRoute() {
 				centre.Refresh()
 			}
+			topLabel.SetText("")
 			routeButton.Enable()
 			clearButton.Disable()
 		},
@@ -96,9 +100,9 @@ func main() {
 	// Launch.
 	//
 	w := application.NewWindow("Path finding")
-	content := container.NewBorder(nil, nil, nil, right, centre)
+	content := container.NewBorder(topLabel, nil, nil, right, centre)
 	w.SetContent(content)
-	w.Resize(fyne.NewSize(750, 650))
+	w.Resize(fyne.NewSize(750, 700))
 	// w.SetPadded(false)
 	w.ShowAndRun()
 }

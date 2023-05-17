@@ -40,6 +40,7 @@ func main() {
 	randButton = widget.NewButton(
 		"Randomise",
 		func() {
+			topLabel.SetText("")
 			display.Randomise(palette)
 			centre.Refresh()
 		},
